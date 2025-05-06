@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeDetails;
+use App\Models\Employee;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,5 @@ Route::get('/add-employee', [EmployeeDetails::class, 'create']);
 Route::post('/add-employee', [EmployeeDetails::class, 'store']);
 Route::get('/employees', [EmployeeDetails::class, 'index']);
 Route::get('/edit-employee/{id}', [EmployeeDetails::class, 'edit']);
+Route::put('/update-employee/{id}', [EmployeeDetails::class, 'update']);
+Route::delete('/delete-employee/{id}', [EmployeeDetails::class, 'destroy']);

@@ -23,7 +23,11 @@
                     <a href="{{url('edit-student/'.$item->id)}}" class="btn btn-primary btn-sm">Edit</a>
                 </td>
                 <td>
-                    <a href="{{url('delete-student/'.$item->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                    <form action="{{url('delete-student/'.$item->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete $item->name ?')">Delete</button>
+                    </form>
                 </td>
             </tr>
             @endforeach

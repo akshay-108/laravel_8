@@ -41,7 +41,7 @@ class EmployeeDetails extends Controller
         $employee->dob = $request->input('emp-dob');
         $employee->designation = $request->input('emp-designation');
         $employee->save();
-        return redirect()->back()->with('Employee added succesfully');
+        return redirect()->back()->with('status', 'Employee added succesfully');
     }
 
     /**
@@ -52,9 +52,7 @@ class EmployeeDetails extends Controller
      */
     public function show($id)
     {
-        echo $id;exit;
-        $employee = Employee::find($id);
-        return view('employee.edit', compact('employee'));
+        //
     }
 
     /**
@@ -65,7 +63,8 @@ class EmployeeDetails extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::find($id);
+        return view('employee.edit', compact('employee'));
     }
 
     /**
@@ -77,7 +76,12 @@ class EmployeeDetails extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->name = $request->input('emp-name');
+        $employee->dob = $request->input('emp-dob');
+        $employee->designation = $request->input('emp-designation');
+        $employee->save();
+        return redirect()->back()->with("status", "Employee updated successfully");
     }
 
     /**
@@ -88,6 +92,8 @@ class EmployeeDetails extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::find($id);
+        $employee->delete();
+        return redirect()->back()->with('status', "Employee deleted successfully");
     }
 }
