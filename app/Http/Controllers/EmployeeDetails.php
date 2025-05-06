@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeDetails extends Controller
@@ -13,7 +14,8 @@ class EmployeeDetails extends Controller
      */
     public function index()
     {
-        //
+        $employee = Employee::all();
+        return view('employee.index', compact('employee'));
     }
 
     /**
@@ -23,7 +25,7 @@ class EmployeeDetails extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
@@ -34,7 +36,12 @@ class EmployeeDetails extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee = new Employee();
+        $employee->name = $request->input('emp-name');
+        $employee->dob = $request->input('emp-dob');
+        $employee->designation = $request->input('emp-designation');
+        $employee->save();
+        return redirect()->back()->with('Employee added succesfully');
     }
 
     /**
@@ -45,7 +52,9 @@ class EmployeeDetails extends Controller
      */
     public function show($id)
     {
-        //
+        echo $id;exit;
+        $employee = Employee::find($id);
+        return view('employee.edit', compact('employee'));
     }
 
     /**
