@@ -39,3 +39,7 @@ Route::delete('/delete-employee/{id}', [EmployeeDetails::class, 'destroy']);
 // crud with form validation
 Route::get('/add-userdetails', [UserController::class, 'create']);
 Route::post('/add-userdetails', [UserController::class, 'store']);
+Route::get('/userdetails', [UserController::class, 'index']);
+Route::get('/edit-userdetails/{id}', [UserController::class, 'edit']);
+Route::put('/update-userdetails/{id}', [UserController::class, 'update']);
+Route::delete('/delete-userdetails/{id}', [UserController::class, 'destroy']);

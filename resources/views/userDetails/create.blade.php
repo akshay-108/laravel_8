@@ -12,7 +12,7 @@
     <div class="container wrapper">
         <h1 class="text-center text-dark">User Details Form</h1>
         @if(session('status'))
-            <h4 class="text-center text-warning">{{session('status')}}</h4>
+            <h4 class="alert alert-success">{{session('status')}}</h4>
         @endif
         @if (count($errors) > 0)
             <div class = "alert alert-danger">
@@ -64,7 +64,7 @@
                 <button type="submit" class="btn btn-primary btn-lg">Submit</button>
             </div>
             <div class="mb-3">
-                <button type="button" class="btn btn-warning btn-lg">View All Users</button>
+                <a href="{{url('userdetails')}}" class="btn btn-warning btn-lg">View All Users</a>
             </div>
         </form>
     </div>

@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $userDetails = UserDetails::all();
+        return view('userDetails.index', compact('userDetails'));
     }
 
     /**
@@ -35,7 +36,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'user_email' => 'required|email|unique:user_details,email',
@@ -50,7 +51,7 @@ class UserController extends Controller
         $userDetails->mobile = $request->input('user_mobile');
         $userDetails->password = bcrypt($request->input('user_password'));
         $userDetails->save();
-        return redirect()->back()->with('User Details Added Successfully');
+        return redirect()->back()->with('status', 'User Details Added Successfully');
     }
 
     /**
@@ -72,7 +73,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $userDetails = UserDetails::find($id);
+        return view('userDetails.edit', compact('userDetails'));
     }
 
     /**
@@ -84,7 +86,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $userDetails = UserDetails::find($id);
+        $userDetails->first_name = $request->input('first_name');
+        $userDetails->last_name = $request->input('last_name');
+        $userDetails->email = $request->input('user_email');
+        $userDetails->mobile = $request->input('user_mobile');
+        $userDetails->save();
+        return redirect()->back()->with('status', 'User Details Updated Successfully');
     }
 
     /**
@@ -95,6 +103,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $userDetails = UserDetails::find($id);
+        $userDetails->delete();
+        return redirect()->back()->with('status', "Employee deleted successfully");
     }
 }

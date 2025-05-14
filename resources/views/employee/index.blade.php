@@ -21,7 +21,7 @@
             <tbody>
                 @foreach($employee as $item)
                 <tr>
-                    <th>{{$item->id}}</th>
+                    <td>{{$item->id}}</th>
                     <td>{{$item->name}}</td>
                     <td>{{$item->dob}}</td>
                     <td>{{$item->designation}}</td>
