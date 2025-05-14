@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeDetails;
-use App\Models\Employee;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +35,7 @@ Route::get('/employees', [EmployeeDetails::class, 'index']);
 Route::get('/edit-employee/{id}', [EmployeeDetails::class, 'edit']);
 Route::put('/update-employee/{id}', [EmployeeDetails::class, 'update']);
 Route::delete('/delete-employee/{id}', [EmployeeDetails::class, 'destroy']);
+
+// crud with form validation
+Route::get('/add-userdetails', [UserController::class, 'create']);
+Route::post('/add-userdetails', [UserController::class, 'store']);
