@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\EmployeeDetails;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AgeValidateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,11 @@ Route::get('/userdetails', [UserController::class, 'index']);
 Route::get('/edit-userdetails/{id}', [UserController::class, 'edit']);
 Route::put('/update-userdetails/{id}', [UserController::class, 'update']);
 Route::delete('/delete-userdetails/{id}', [UserController::class, 'destroy']);
+
+// crud with form validation and middleware
+Route::get('/add-customer', [AgeValidateController::class, 'create']);
+Route::post('/add-customer', [AgeValidateController::class, 'store']);
+Route::get('/customers', [AgeValidateController::class, 'index']);
+Route::get('/edit-customers', [AgeValidateController::class, 'edit']);
+Route::put('/update-customers', [AgeValidateController::class, 'update']);
+Route::delete('/delete-customers', [AgeValidateController::class, 'destroy']);
