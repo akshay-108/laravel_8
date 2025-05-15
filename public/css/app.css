@@ -1,0 +1,27 @@
+.container {
+    border: solid 2px;
+    width:fit-content;
+    padding: 20px;
+    margin-left: 39%;
+}
+
+.input-name, .input-email, .input-mobile, .input-age{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 253px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.form-submit{
+    margin-top: 10px;
+    padding: 10px;
+    background-color: darkorange;
+    font-size: 16px;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+}
