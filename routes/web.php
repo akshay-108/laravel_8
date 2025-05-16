@@ -45,10 +45,10 @@ Route::get('/edit-userdetails/{id}', [UserController::class, 'edit']);
 Route::put('/update-userdetails/{id}', [UserController::class, 'update']);
 Route::delete('/delete-userdetails/{id}', [UserController::class, 'destroy']);
 
-// crud with form validation and middleware
+// crud with form validation
 Route::get('/add-customer', [AgeValidateController::class, 'create']);
 Route::post('/add-customer', [AgeValidateController::class, 'store']);
 Route::get('/customers', [AgeValidateController::class, 'index']);
-Route::get('/edit-customers', [AgeValidateController::class, 'edit']);
-Route::put('/update-customers', [AgeValidateController::class, 'update']);
-Route::delete('/delete-customers', [AgeValidateController::class, 'destroy']);
+Route::get('/edit-customer/{id}', [AgeValidateController::class, 'edit']);
+Route::put('/update-customer/{id}', [AgeValidateController::class, 'update']);
+Route::delete('/delete-customer/{id}', [AgeValidateController::class, 'destroy']);

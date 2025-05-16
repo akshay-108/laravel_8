@@ -15,7 +15,8 @@ class AgeValidateController extends Controller
      */
     public function index()
     {
-        //
+        $customers = AgeValidate::all();
+        return view('ageValidation.index', compact('customers'));
     }
 
     /**
@@ -70,9 +71,10 @@ class AgeValidateController extends Controller
      * @param  \App\Models\AgeValidate  $ageValidate
      * @return \Illuminate\Http\Response
      */
-    public function edit(AgeValidate $ageValidate)
+    public function edit($id)
     {
-        //
+        $customer = AgeValidate::find($id);
+        return view('ageValidation.edit', compact('customer'));
     }
 
     /**
@@ -82,9 +84,16 @@ class AgeValidateController extends Controller
      * @param  \App\Models\AgeValidate  $ageValidate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AgeValidate $ageValidate)
+    public function update(Request $request, $id)
     {
-        //
+        $customer = AgeValidate::find($id);
+        $customer->name = $request->input('name');
+        $customer->email = $request->input('email');
+        $customer->number = $request->input('mobile');
+        $customer->age = $request->input('age');
+        $customer->save();
+
+        return redirect()->back()->with('status', 'Customer Updated Successfully');
     }
 
     /**
@@ -93,8 +102,10 @@ class AgeValidateController extends Controller
      * @param  \App\Models\AgeValidate  $ageValidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AgeValidate $ageValidate)
+    public function destroy($id)
     {
-        //
+        $customer = AgeValidate::find($id);
+        $customer->delete();
+        return redirect()->back()->with('status', "Employee deleted successfully");
     }
 }
