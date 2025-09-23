@@ -13,6 +13,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\Frontend\FrontendController::class, 'index']);
+Route::get('/tutorial/{category_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewCategoryPost']);
+Route::get('/tutorial/{category_slug}/{post_slug}', [App\Http\Controllers\Frontend\FrontendController::class, 'viewPost']);
+
+// comment system
+Route::post('/comments', [App\Http\Controllers\Frontend\CommentController::class, 'store']);
+Route::post('/delete-comment', [App\Http\Controllers\Frontend\CommentController::class, 'destroy']);
+
+Route::prefix('admin')->middleware(['auth','isAdmin'])->group(function() {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index']);
+    Route::get('/view-category', [App\Http\Controllers\Admin\CategoryController::class, 'index']);
+    Route::get('/add-category', [App\Http\Controllers\Admin\CategoryController::class, 'create']);
+    Route::post('/add-category', [App\Http\Controllers\Admin\CategoryController::class, 'store']);
+    Route::get('/edit-category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'edit']);
+    Route::put('/edit-category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'update']);
+    // Route::get('/delete-category/{id}', [App\Http\Controllers\Admin\CategoryController::class, 'delete']);
+    Route::post('/delete-category', [App\Http\Controllers\Admin\CategoryController::class, 'delete']);
+
+    Route::get('/posts', [App\Http\Controllers\Admin\PostController::class, 'index']);
+    Route::get('/add-post', [App\Http\Controllers\Admin\PostController::class, 'create']);
+    Route::post('/add-post', [App\Http\Controllers\Admin\PostController::class, 'store']);
+    Route::get('/edit-post/{id}', [App\Http\Controllers\Admin\PostController::class, 'edit']);
+    Route::put('/edit-post/{id}', [App\Http\Controllers\Admin\PostController::class, 'update']);
+    Route::get('/delete-post/{id}', [App\Http\Controllers\Admin\PostController::class, 'delete']);
+
+    Route::get('/users', [App\Http\Controllers\Admin\UserController::class, 'index']);
+    Route::get('/edit-user/{id}', [App\Http\Controllers\Admin\UserController::class, 'edit']);
+    Route::put('/edit-user/{id}', [App\Http\Controllers\Admin\UserController::class, 'update']);
+
+    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index']);
+    Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'store']);
 });
