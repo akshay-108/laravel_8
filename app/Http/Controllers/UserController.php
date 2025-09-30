@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash; // For hashing passwords
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +16,23 @@ class UserController extends Controller
      */
     public function index()
     {
-        echo "any";exit;
+        return view('login');
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $user = User::where(['email'=> $request['email']])->first();
+            if(!$user) {
+                return redirect('login')->with('error', 'Username or Password not matched');
+            } else {
+                $request->session()->put('user', $user);
+                Auth::login($user);
+                return redirect('/admin/dashboard');
+            }
+        } catch (\Exception $e) {
+            return redirect('login')->with('error', $e->getMessage());
+        }
     }
 
     /**
