@@ -18,13 +18,13 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Please login first.');
+            return redirect()->route('login');
         }
 
         if(Auth::user()->role == 'manager' || Auth::user()->role == 'developer') {
             return $next($request);
         }
         // return $next($request);
-        return redirect()->route('/login')->with('error', 'Unauthorised access!');
+        return redirect()->route('login')->with('error', 'Unauthorised access!');
     }
 }
